@@ -5,11 +5,17 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Clase modelo para los datos base del simulador.
+ *
+ * @author Andrés F. Ceballos.
+ * @since 2024-12-18.
+ */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Simulator {
+public class SimulatorModel {
 
   private String path;
 

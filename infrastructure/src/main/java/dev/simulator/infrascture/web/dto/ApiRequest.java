@@ -19,7 +19,7 @@ public class ApiRequest {
   //// PROPIEDADES
   ////
 
-  private String path;
+  private String pathx;
 
   private String method;
 

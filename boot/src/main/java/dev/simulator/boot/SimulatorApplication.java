@@ -2,6 +2,7 @@ package dev.simulator.boot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * Clase principal del sistema.
@@ -10,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 2024-12-17.
  */
 @SpringBootApplication
+@ComponentScan(basePackages = {"dev.simulator"})
 public class SimulatorApplication {
 
   ////
