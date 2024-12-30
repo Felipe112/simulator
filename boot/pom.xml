@@ -9,6 +9,7 @@
     <artifactId>Simulator</artifactId>
     <groupId>dev.simulator</groupId>
     <version>1.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
 
   <dependencies>
@@ -16,9 +17,15 @@
       <groupId>dev.simulator</groupId>
       <artifactId>application</artifactId>
     </dependency>
+
     <dependency>
       <groupId>dev.simulator</groupId>
       <artifactId>infrastructure</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>dev.simulator</groupId>
+      <artifactId>domain</artifactId>
     </dependency>
   </dependencies>
 

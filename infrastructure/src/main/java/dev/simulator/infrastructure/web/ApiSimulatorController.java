@@ -1,11 +1,13 @@
-package dev.simulator.infrascture.web;
+package dev.simulator.infrastructure.web;
 
 import dev.simulator.application.ports.inputs.CreateSimulationUseCaseInput;
-import dev.simulator.infrascture.utils.Constants;
-import dev.simulator.infrascture.web.dto.ApiRequest;
-import dev.simulator.infrascture.web.dto.GenericResponse;
+import dev.simulator.domain.models.SimulatorModel;
+import dev.simulator.infrastructure.utils.Constants;
+import dev.simulator.infrastructure.web.dto.ApiRequest;
+import dev.simulator.infrastructure.web.dto.GenericResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,36 +21,39 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2024-12-17.
  */
 @RestController
-@RequestMapping("/simulator")
+@RequestMapping(value = "/simulator", produces = "application/json", consumes = "application/json")
 public class ApiSimulatorController {
 
-  ////
-  //// PROPIEDADES
-  ////
+  /// / / PROPIEDADES /
+
+  private final CreateSimulationUseCaseInput simulatorService;
+
+  /// / / MÉTODOS PÚBLICOS /
 
   @Autowired
-  private CreateSimulationUseCaseInput simulatorService;
+  public ApiSimulatorController(CreateSimulationUseCaseInput input) {
 
-  ////
-  //// MÉTODOS PÚBLICOS
-  ////
+    this.simulatorService = input;
+  }
 
   /**
    * Metodo encargado de recibir las peticiones mediante un servicio Rest.
    *
    * @param request Datos minimos de la solicitud.
-   *
    * @return Resultado del simulador.
    */
-  @PostMapping("/create")
+  @PostMapping(value = "/create", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<GenericResponse<String>> createSimulation(@RequestBody ApiRequest request) {
 
-    String result = simulatorService.execute(null);
+    String result = simulatorService.execute(
+            SimulatorModel.builder().path(request.getPaths()).method(request.getMethod())
+                .statusCode(request.getStatusCode()).contentType(request.getContentType())
+                .body(request.getBody()).build());
 
     // Retornar la URL simulada
     // String apiUrl = "http://localhost:8081" + request.getPathx();
     return new ResponseEntity<>(new GenericResponse<>(Constants.SUCCESS_RESPONSE, result),
-        HttpStatus.CREATED);
+            HttpStatus.OK);
 
   }
 

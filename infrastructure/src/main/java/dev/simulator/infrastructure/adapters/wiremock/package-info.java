@@ -4,4 +4,4 @@
  * @author Andrés F. Ceballos.
  * @since 2024-12-18.
  */
-package dev.simulator.infrascture.adapters.wiremock;
+package dev.simulator.infrastructure.adapters.wiremock;

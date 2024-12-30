@@ -1,5 +1,7 @@
-package dev.simulator.infrascture.web.dto;
+package dev.simulator.infrastructure.web.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,13 +15,14 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ApiRequest {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class ApiRequest implements Serializable {
 
   ////
   //// PROPIEDADES
   ////
 
-  private String pathx;
+  private String paths;
 
   private String method;
 

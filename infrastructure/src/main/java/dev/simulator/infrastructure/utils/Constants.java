@@ -1,4 +1,4 @@
-package dev.simulator.infrascture.utils;
+package dev.simulator.infrastructure.utils;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

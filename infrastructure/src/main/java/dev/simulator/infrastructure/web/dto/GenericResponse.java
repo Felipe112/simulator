@@ -1,9 +1,12 @@
-package dev.simulator.infrascture.web.dto;
+package dev.simulator.infrastructure.web.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
 import java.time.LocalDate;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * Clase general para dar un estandar de respuestas con el mismo formato.
@@ -11,8 +14,10 @@ import lombok.NoArgsConstructor;
  * @author Andrés F. Ceballos.
  * @since 2024-12-17.
  */
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class GenericResponse<T extends Serializable> implements Serializable {
 
   ////
@@ -20,6 +25,7 @@ public class GenericResponse<T extends Serializable> implements Serializable {
   ////
   private String message;
 
+  @JsonFormat(pattern = "yyyy-MM-dd")
   private LocalDate date;
 
   private T result;
