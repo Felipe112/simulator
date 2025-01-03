@@ -46,12 +46,10 @@ public class ApiSimulatorController {
   public ResponseEntity<GenericResponse<String>> createSimulation(@RequestBody ApiRequest request) {
 
     String result = simulatorService.execute(
-            SimulatorModel.builder().path(request.getPaths()).method(request.getMethod())
-                .statusCode(request.getStatusCode()).contentType(request.getContentType())
-                .body(request.getBody()).build());
+            SimulatorModel.builder().path(request.getPaths()).method(request.getMethod()).statusCode(request.getStatusCode())
+                    .body(request.getBody()).build());
 
     // Retornar la URL simulada
-    // String apiUrl = "http://localhost:8081" + request.getPathx();
     return new ResponseEntity<>(new GenericResponse<>(Constants.SUCCESS_RESPONSE, result),
             HttpStatus.OK);
 

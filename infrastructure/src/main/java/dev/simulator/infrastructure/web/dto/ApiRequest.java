@@ -1,10 +1,7 @@
 package dev.simulator.infrastructure.web.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * DTO enfocado en capturar los datos necesarios en una petición.
@@ -12,15 +9,12 @@ import lombok.NoArgsConstructor;
  * @author Andrés F. Ceballos.
  * @since 2024-12-17.
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ApiRequest implements Serializable {
 
-  ////
-  //// PROPIEDADES
-  ////
+  /// /
+  /// / PROPIEDADES
+  /// /
 
   private String paths;
 
@@ -28,8 +22,39 @@ public class ApiRequest implements Serializable {
 
   private int statusCode;
 
-  private String contentType;
-
   private String body;
 
+  public String getPaths() {
+    return paths;
+  }
+
+  public void setPaths(String paths) {
+    this.paths = paths;
+  }
+
+  public String getMethod() {
+    return method;
+  }
+
+  public void setMethod(String method) {
+    this.method = method;
+  }
+
+  public int getStatusCode() {
+    return statusCode;
+  }
+
+  public void setStatusCode(int statusCode) {
+    this.statusCode = statusCode;
+  }
+
+  public String getBody() {
+    return body;
+  }
+
+  public void setBody(String body) {
+    this.body = body;
+  }
 }
+
+

@@ -23,8 +23,6 @@ public class SimulatorModel {
 
   private int statusCode;
 
-  private String contentType;
-
   private String body;
 
 }
