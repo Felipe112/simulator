@@ -1,9 +1,12 @@
 package dev.simulator.infrastructure.config;
 
+import dev.simulator.application.ports.outputs.DataGeneratorRepository;
 import dev.simulator.application.ports.outputs.WireMockRepository;
+import dev.simulator.infrastructure.adapters.huggingface.HuggingFaceRepositoryImpl;
 import dev.simulator.infrastructure.adapters.wiremock.WireMockRepositoryImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * Configuración que facilita la inyección de las dependencias usado por spring boot.
@@ -24,5 +27,11 @@ public class InfrastructureConfig {
 
     return new WireMockRepositoryImpl();
   }
+
+  /*@Bean
+  public DataGeneratorRepository dataGeneratorRepository() {
+
+    return new HuggingFaceRepositoryImpl();
+  }*/
 
 }

@@ -1,6 +1,7 @@
 package dev.simulator.application.usecases;
 
 import dev.simulator.application.ports.inputs.CreateSimulationUseCaseInput;
+import dev.simulator.application.ports.outputs.DataGeneratorRepository;
 import dev.simulator.application.ports.outputs.WireMockRepository;
 import dev.simulator.domain.models.SimulatorModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +22,16 @@ public class SimulatorUseCase implements CreateSimulationUseCaseInput {
   /// /
 
   private final WireMockRepository wireMockRepository;
+  private final DataGeneratorRepository dataGeneratorRepository;
 
   /// /
   /// / CONSTRUCTORES
   /// /
 
   @Autowired
-  public SimulatorUseCase(WireMockRepository wireMockRepository) {
+  public SimulatorUseCase(WireMockRepository wireMockRepository, DataGeneratorRepository dataGeneratorRepository) {
     this.wireMockRepository = wireMockRepository;
+    this.dataGeneratorRepository = dataGeneratorRepository;
   }
 
 
@@ -44,6 +47,9 @@ public class SimulatorUseCase implements CreateSimulationUseCaseInput {
       request = new SimulatorModel();
     }
 
+    String data = dataGeneratorRepository.generate(request);
+    request.setBody(data);
+
     return wireMockRepository.generate(request);
   }
 
@@ -53,6 +59,6 @@ public class SimulatorUseCase implements CreateSimulationUseCaseInput {
   //3. En caso de que no especifiquen el metodo se crearan todos los metodos, de lo contario el especifico.
   //4. Definir la libreria y apis para generar los datos con IA, esto sera antes de invocar el servicio de MOCK.
   //5. Integrarnos con Hugging Face (Esto puede cambiar por un modelo generativo propio o administrado propiamente)
-  
+
 
 }
