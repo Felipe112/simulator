@@ -52,7 +52,8 @@ public class WireMockRepositoryImpl implements WireMockRepository {
 
     int port = wireMockServer.port();
 
-    String response = wireMockServer.baseUrl() + "/" + (simulator.getPath() == null || simulator.getPath().isBlank() ? PATH_DEFAULT : simulator.getPath());
+    String response = wireMockServer.baseUrl() + (simulator.getPath() == null || simulator.getPath().isBlank() ? PATH_DEFAULT :
+            simulator.getPath());
 
 
     return response;

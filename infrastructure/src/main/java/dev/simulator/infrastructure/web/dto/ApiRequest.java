@@ -1,7 +1,7 @@
 package dev.simulator.infrastructure.web.dto;
 
-import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.io.Serializable;
 
 /**
  * DTO enfocado en capturar los datos necesarios en una petición.

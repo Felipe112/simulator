@@ -3,6 +3,6 @@
  * https://huggingface.co/
  *
  * @author Andrés F. Ceballos.
- * @since 2025-01-08.
+ * @since 2025-01-13.
  */
-package dev.simulator.infrastructure.adapters.huggingface;
+package dev.simulator.infrastructure.adapters.lmstudio;
