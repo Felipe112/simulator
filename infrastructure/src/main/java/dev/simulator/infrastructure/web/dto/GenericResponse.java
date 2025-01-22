@@ -18,11 +18,11 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GenericResponse<T extends Serializable> implements Serializable {
+public class GenericResponse<T> implements Serializable {
 
-  ////
-  //// PROPIEDADES
-  ////
+  /// /
+  /// / PROPIEDADES
+  /// /
   private String message;
 
   @JsonFormat(pattern = "yyyy-MM-dd")
@@ -49,7 +49,7 @@ public class GenericResponse<T extends Serializable> implements Serializable {
    * Constructor de mensaje y resultados.
    *
    * @param message Mensaje.
-   * @param result Resultado.
+   * @param result  Resultado.
    */
   public GenericResponse(String message, T result) {
 

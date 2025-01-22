@@ -1,5 +1,7 @@
 package dev.simulator.infrastructure.adapters.lmstudio;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.simulator.application.ports.outputs.DataGeneratorRepository;
 import dev.simulator.domain.models.SimulatorModel;
 import dev.simulator.infrastructure.adapters.lmstudio.dto.ModelResponseDto;
@@ -47,14 +49,27 @@ public class LlamaRepositoryImpl implements DataGeneratorRepository {
     body.put("max_tokens", "1000");
     body.put("temperature", "0.7");
 
-    Mono<ModelResponseDto> responseMono = webClient.post()
-            .headers(httpHeaders -> httpHeaders.addAll(headers)) // Añadir encabezados
-            .bodyValue(body) // Añadir el cuerpo
-            .retrieve() // Enviar la solicitud y manejar la respuesta
-            .bodyToMono(ModelResponseDto.class);
+    //ModelResponseDto
+    Mono<String> responseMono = webClient.post()
+            .headers(httpHeaders -> httpHeaders.addAll(headers))
+            .bodyValue(body)
+            .retrieve()
+            .bodyToMono(String.class)
+            .doOnNext(response -> System.out.println("Respuesta deserializada: " + response))
+            .doOnError(error -> System.err.println("Error al deserializar: " + error.getMessage()));
 
     // Procesar la respuesta
-    ModelResponseDto responseDto = responseMono.block(); // Bloqueo para obtener la respuesta de forma sincrónica
+    // ModelResponseDto responseDto = responseMono.block();
+    ObjectMapper objectMapper = new ObjectMapper();
+    objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    
+    ModelResponseDto responseDto = new ModelResponseDto();
+
+    try {
+      responseDto = objectMapper.readValue(responseMono.block(), ModelResponseDto.class);
+    } catch (Exception e) {
+      System.out.println("Error: " + e.getMessage());
+    }
     if (responseDto == null || responseDto.getChoices() == null || responseDto.getChoices().isEmpty()) {
       throw new RuntimeException("El cuerpo de la respuesta es nulo o no contiene datos.");
     }

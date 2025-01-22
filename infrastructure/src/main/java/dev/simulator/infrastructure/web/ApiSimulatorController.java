@@ -46,7 +46,7 @@ public class ApiSimulatorController {
   public ResponseEntity<GenericResponse<String>> createSimulation(@RequestBody ApiRequest request) {
 
     String result = simulatorService.execute(
-            SimulatorModel.builder().path(request.getPaths()).method(request.getMethod()).statusCode(request.getStatusCode())
+            new SimulatorModel.Builder().path(request.getPaths()).method(request.getMethod()).statusCode(request.getStatusCode())
                     .body(request.getBody()).build());
 
     // Retornar la URL simulada
